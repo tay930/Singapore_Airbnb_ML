@@ -43,3 +43,11 @@ def add_amenity_features(df, top_40_names):
         )
 
     return df
+
+def price_to_float(df):
+    df = df.copy()
+
+    df['price'] = pd.to_numeric(df["price"].astype(str).str.replace(r"[$,]", "", regex=True), errors="coerce")
+    df['price'] = df['price'].astype(float)
+
+    return df
