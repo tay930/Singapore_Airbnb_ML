@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import OneHotEncoder
-from sklearn.compose import ColumnTransformer
+from sklearn.compose import ColumnTransformer, make_column_selector
 
 numerical_columns = ['hosts_time_as_host_years', 'longitude',
                     'latitude', 'accommodates', 'bedrooms', 'beds',
@@ -25,7 +25,7 @@ categorical_pipeline = Pipeline([
 ])
 
 preprocessor = ColumnTransformer([
-    ("numerical", numerical_pipeline, numerical_columns),
-    ("categorical", categorical_pipeline, categorical_columns)
+    ("numerical", numerical_pipeline, make_column_selector(dtype_include=np.number)),
+    ("categorical", categorical_pipeline, make_column_selector(dtype_include=object))
 ])
 
