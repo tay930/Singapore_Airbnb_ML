@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 import json
+from collections import Counter
+from sklearn.base import BaseEstimator, TransformerMixin
 
 def parse_bathroom(df):
     df = df.copy()
@@ -51,3 +53,42 @@ def price_to_float(df):
     df['price'] = df['price'].astype(float)
 
     return df
+
+
+class TopAmenities(BaseEstimator, TransformerMixin):
+    def __init__(self, n=40):
+        self.n = n
+
+    def fit(self, X, y=None):
+        amenities = X["amenities"].apply(
+            lambda x: json.loads(x) if isinstance(x, str) else []
+        )
+
+        counts = Counter(
+            amenity
+            for items in amenities
+            for amenity in items
+        )
+
+        self.top_amenities_ = [
+            amenity for amenity, count in counts.most_common(self.n)
+        ]
+
+        return self
+
+    def transform(self, X):
+        X = X.copy()
+
+        amenities = X["amenities"].apply(
+            lambda x: json.loads(x) if isinstance(x, str) else []
+        )
+
+        for amenity in self.top_amenities_:
+            X[f"has_{amenity}"] = amenities.apply(
+                lambda items: int(amenity in items)
+            )
+            
+        X = X.drop(columns=["amenities"])
+
+        return X
+
