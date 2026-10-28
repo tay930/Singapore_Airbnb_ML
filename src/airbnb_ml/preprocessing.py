@@ -3,7 +3,7 @@ import pandas as pd
 
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.compose import ColumnTransformer, make_column_selector
 
 numerical_columns = ['hosts_time_as_host_years', 'longitude',
@@ -19,6 +19,11 @@ numerical_pipeline = Pipeline([
     ("imputer", SimpleImputer(strategy="median")),
 ])
 
+numerical_pipeline_scaled = Pipeline([
+    ("imputer", SimpleImputer(strategy="median")),
+    ('scaler', StandardScaler())
+])
+
 categorical_pipeline = Pipeline([
     ("imputer", SimpleImputer(strategy="most_frequent")),
     ("encoder", OneHotEncoder(handle_unknown="ignore"))
@@ -29,3 +34,7 @@ preprocessor = ColumnTransformer([
     ("categorical", categorical_pipeline, make_column_selector(dtype_include=object))
 ])
 
+preprocessor_scaled = ColumnTransformer([
+    ("numerical", numerical_pipeline_scaled, make_column_selector(dtype_include=np.number)),
+    ("categorical", categorical_pipeline, make_column_selector(dtype_include=object))
+])
