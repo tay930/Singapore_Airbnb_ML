@@ -93,10 +93,22 @@ Models were evaluated using three regression metrics:
 
 Two models emerged as interesting, each performing best on different evaluation metrics.
 
-| Model | MAE ($) | RMSE ($) | R² |
+| Model | MAE | RMSE | R² |
 |---|---:|---:|---:|
-| Random Forest (300 trees) | 71.46 | **129.24** | **0.677** |
+| Random Forest (100 Trees) | 72.08 | 131.07 | 0.668 |
+| Linear Regression | 103.38 | 169.24 | 0.446 |
+| Extra Trees Regressor | 71.26 | 138.34 | 0.630 |
+| Hist Gradient Boosting | 75.12 | 136.54 | 0.639 |
+| Log Price Random Forest (100 Trees) | 66.52 | 138.32 | 0.630 |
+| Log Price Random Forest (300 Trees) | 66.10 | 137.48 | 0.634 |
+| Log Price XGBoost | 70.29 | 142.88 | 0.605 |
+| Random Forest (300 Trees) | 71.46 | **129.24** | **0.677** |
+| Ridge Regression | 102.90 | 168.78 | 0.449 |
+| SVR | 100.31 | 188.86 | 0.310 |
+| XGBoost | 76.02 | 140.22 | 0.619 |
+| Log Price Extra Trees | 67.82 | 139.47 | 0.624 |
 | Tuned Log Random Forest | **65.72** | 137.99 | 0.631 |
+| Tuned Random Forest | 72.26 | 139.71 | 0.622 |
 
 The tuned log-transformed Random Forest achieved the lowest MAE, indicating better average absolute prediction accuracy.
 
