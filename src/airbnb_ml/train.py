@@ -36,7 +36,7 @@ X = df[X_features].copy()
 y = df['price']
 y_log = df['logprice']
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=SEED)
+X_train, X_test, y_train, y_test = train_test_split(X, y_log, test_size=0.2, random_state=SEED)
 
 lower = y_train.quantile(0.01)
 upper = y_train.quantile(0.99)
