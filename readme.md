@@ -136,8 +136,10 @@ Despite predictive performance, accurately estimating luxury listings remains a 
 ### Limitations and Future Improvements
 
 - **Dataset size:** The relatively small number of listings limits the amount of information available to learn complex pricing patterns.
-- **Luxury properties:** Additional features describing property quality and luxury characteristics may improve predictions for expensive listings.
+- **Luxury properties:** Additional features describing property quality and luxury characteristics may improve predictions for expensive listings, such as through TF-IDF on name/ description
 - **Temporal information:** Incorporating seasonality and market trends could help account for price fluctuations.
+- **Feature Creation:** Can try implementing features like distance to CBD or nearest MRT
+
 
 ## Project Structure
 
