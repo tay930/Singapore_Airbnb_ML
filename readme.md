@@ -5,9 +5,6 @@ Predicting nightly Airbnb accommodation prices in Singapore using machine learni
 ---
 
 ## Overview
-
-How accurately can machine learning predict the nightly price of an Airbnb listing in Singapore?
-
 This project explores several regression approaches to estimate nightly accommodation prices using listing characteristics, location, host information, reviews and amenities.
 
 The goal is to investigate how different modelling approaches perform on real-world accommodation data, understand the factors influencing price predictions, and identify the limitations of the resulting models.
@@ -37,13 +34,11 @@ See the [EDA notebook](notebooks/01_eda.ipynb) for the full analysis.
 ![prices_against_accomodates](reports/eda/prices_against_accomodates.png)
 
 
-
 ### Key observations
 
 - Listing prices exhibit a right-skewed distribution, with a relatively small number of expensive properties.
 - Listings vary considerably in price across property characteristics and locations.
-- Amenities provide additional information about listing characteristics.
-- Expensive luxury properties introduce challenges for accurate price prediction.
+- Amenities provide information about listing characteristics.
 
 ## Methodology
 
@@ -81,7 +76,6 @@ Both original-price and log-transformed target approaches were explored to inves
 GridSearchCV with 5-fold cross-validation was used to tune selected models.
 
 The search explored parameters including:
-
 - Number of estimators.
 - Maximum tree depth.
 - Minimum samples per leaf.
@@ -125,7 +119,7 @@ Error analysis was conducted on the tuned log-transformed Random Forest to inves
 - Expensive listings are systematically underpredicted.
 - The highest-priced listings contribute disproportionately to the overall prediction error.
 
-Further inspection revealed that some of the largest errors came from legitimate luxury properties, including penthouses with nightly prices exceeding $1,400.
+Further inspection of the listings revealed that some of the largest errors came from legitimate luxury properties, including penthouses with nightly prices exceeding $1,400.
 
 This suggests that the available features may not fully capture the characteristics that distinguish luxury accommodation from more typical listings.
 
@@ -137,7 +131,7 @@ The experiments demonstrated the importance of preprocessing, feature engineerin
 
 The two strongest Random Forest approaches demonstrated different strengths: the log-transformed model achieved lower MAE, while the original-price model performed better in terms of RMSE and R².
 
-Despite reasonable predictive performance, accurately estimating luxury listings remains a challenge.
+Despite predictive performance, accurately estimating luxury listings remains a challenge.
 
 ### Limitations and Future Improvements
 
@@ -158,9 +152,12 @@ singapore-airbnb-price-prediction/
 │   ├── features.py
 │   ├── preprocessing.py
 │   ├── train.py
+│   ├── error_analysis.py
 │   └── evaluate.py
 ├── models/
 ├── reports/
+│   ├── eda/
+│   ├── error_analysis/
 │   └── figures/
 ├── README.md
 └── requirements.txt
